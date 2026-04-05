@@ -43,8 +43,10 @@ def loadConfig():
     data["journey"]["departureStation"] = os.getenv("departureStation") or "PAD"
 
     data["journey"]["destinationStation"] = os.getenv("destinationStation") or ""
-    if data["journey"]["destinationStation"] == "null" or data["journey"]["destinationStation"] == "undefined":
-        data["journey"]["destinationStation"] = ""
+    if data["journey"]["destinationStation"] and data["journey"]["destinationStation"] not in ("null", "undefined"):
+        data["journey"]["destinationStation"] = [s.strip() for s in data["journey"]["destinationStation"].split(",")]
+    else:
+        data["journey"]["destinationStation"] = [""]
 
     data["journey"]["individualStationDepartureTime"] = False
     if os.getenv("individualStationDepartureTime", "").upper() == "TRUE":
@@ -55,7 +57,8 @@ def loadConfig():
     data["journey"]['timeOffset'] = os.getenv("timeOffset") or "0"
     data["journey"]["screen1Platform"] = parsePlatformData(os.getenv("screen1Platform"))
     data["journey"]["screen2Platform"] = parsePlatformData(os.getenv("screen2Platform"))
-
+    data["journey"]["numericPlatformsOnly"] = os.getenv("numericPlatformsOnly", "False").lower() == "true"
+    
     data["api"]["apiKey"] = os.getenv("apiKey") or None
     data["api"]["operatingHours"] = os.getenv("operatingHours") or ""
 
