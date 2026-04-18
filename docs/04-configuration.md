@@ -23,7 +23,7 @@ These environment variables are specified using the [balenaCloud dashboard](http
 | `screen1Platform` | `1` (sets the platform you want to have displayed on the first or single-screen display)
 | `screen2Platform` | `2` (sets the platform you want to have displayed on the second display)
 | `individualStationDepartureTime` | `False` (Displays the estimated or scheduled time of the service at each leg of a journey)
-| `numericPlatformsOnly` | This will only show numeric platforms, some stations may have local services that use alphabetic stations for local services (this will remove stations like 3A, 4B).
+| `numericPlatformsOnly` | `False` This will only show numeric platforms, some stations may have local services that use alphabetic stations for local services (this will remove stations like 3A, 4B).
 | `fpsTime` | `4` (adjusts how often the effective FPS is displayed)
 | `headless` | `True` (outputs to noop serial device rather than serial port; useful for running on a development machine)
 | `showDepartureNumbers` | `True` (adds 1st / 2nd / 3rd as per UK train departures)
