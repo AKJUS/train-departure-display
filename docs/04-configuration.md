@@ -12,7 +12,7 @@ These environment variables are specified using the [balenaCloud dashboard](http
 |`apiKey` **(REQUIRED)** | `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` (OpenLDBWS API key)
 |`TZ`  | `Europe/London`, will default to UTC if not set ([timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones))
 |`departureStation`  | `PAD` ([station code](https://www.nationalrail.co.uk/stations_destinations/48541.aspx))
-|`destinationStation`  | `HWV` ([station code](https://www.nationalrail.co.uk/stations_destinations/48541.aspx)) [optional] Filters trains shown to only those that call at this station
+|`destinationStation`  | `HWV` ([station code](https://www.nationalrail.co.uk/stations_destinations/48541.aspx)) [optional] Filters trains shown to only those that call at this station. This can be multiple stations seperated by a comma. eg. PAD, KGX, STP
 |`timeOffset`  | `5` [optional] (Time offset, in minutes, for the departure board. Can be used to see into the future (positive value) or past (negative value). Set 5 if you live 5 min from the station and want to hide departures that are too soon to catch)
 |`refreshTime` | `120` (seconds between data refresh)
 |`screenRotation` | `2` (rotates the output of the OLED, 0 for when using the desk stand, 2 for the monitor mount ([docs](https://luma-oled.readthedocs.io/en/latest/api-documentation.html#luma.oled.device.ssd1322)))
@@ -23,6 +23,7 @@ These environment variables are specified using the [balenaCloud dashboard](http
 | `screen1Platform` | `1` (sets the platform you want to have displayed on the first or single-screen display)
 | `screen2Platform` | `2` (sets the platform you want to have displayed on the second display)
 | `individualStationDepartureTime` | `False` (Displays the estimated or scheduled time of the service at each leg of a journey)
+| `numericPlatformsOnly` | `False` This will only show numeric platforms, some stations may have local services that use alphabetic stations for local services (this will remove stations like 3A, 4B).
 | `fpsTime` | `4` (adjusts how often the effective FPS is displayed)
 | `headless` | `True` (outputs to noop serial device rather than serial port; useful for running on a development machine)
 | `showDepartureNumbers` | `True` (adds 1st / 2nd / 3rd as per UK train departures)

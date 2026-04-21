@@ -2,6 +2,7 @@ luma.oled
 timeloop
 requests
 xmltodict
+defusedxml
 RPi.GPIO
 spidev
 cbor2>=5.8.0

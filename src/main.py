@@ -319,7 +319,7 @@ def drawDebugScreen(device, width, height, screen="1", showTime=False):
 
     # has a destination been set? add it in!
     if(config["journey"]["destinationStation"]):
-        debugLines["1B"] += f"->{config['journey']['destinationStation']}"
+        debugLines["1B"] += f"->{','.join(config['journey']['destinationStation'])}"
 
     # what about a plaform?
     if(config["journey"]["screen"+screen+"Platform"]):
@@ -381,25 +381,24 @@ def drawBlankSignage(device, width, height, departureStation):
 
     return virtualViewport
 
-
-def platform_filter(departureData, platformNumber, station):
+def platform_filter(departureData, platformNumber, station, numericOnly=False):
     platformDepartures = []
     for sub in departureData:
-        if platformNumber == "":
+        if numericOnly:
+            if sub.get('platform') is not None and sub['platform'].isdigit():
+                platformDepartures.append(sub)
+        elif platformNumber == "":
             platformDepartures.append(sub)
         elif sub.get('platform') is not None:
             if sub['platform'] == platformNumber:
                 res = sub
                 platformDepartures.append(res)
-
     if len(platformDepartures) > 0:
         firstDepartureDestinations = platformDepartures[0]["calling_at_list"]
         platformData = platformDepartures, firstDepartureDestinations, station
     else:
         platformData = platformDepartures, "", station
-
     return platformData
-
 
 def drawSignage(device, width, height, data, screen_id='default'):
     virtualViewport = viewport(device, width=width, height=height)
@@ -478,7 +477,7 @@ def drawSignage(device, width, height, data, screen_id='default'):
 
 def getIp():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.settimeout(0)
+    s.settimeout(1)
     try:
         # doesn't even have to be reachable
         s.connect(('10.254.254.254', 1))
@@ -582,11 +581,11 @@ try:
                             departureData = data[0]
                             nextStations = data[1]
                             station = data[2]
-                            screenData = platform_filter(departureData, config["journey"]["screen1Platform"], station)
+                            screenData = platform_filter(departureData, config["journey"]["screen1Platform"], station, config["journey"]["numericPlatformsOnly"])
                             virtual = drawSignage(device, width=widgetWidth, height=widgetHeight, data=screenData, screen_id='screen1')
 
                             if config['dualScreen']:
-                                screen1Data = platform_filter(departureData, config["journey"]["screen2Platform"], station)
+                                screen1Data = platform_filter(departureData, config["journey"]["screen2Platform"], station, config["journey"]["numericPlatformsOnly"])
                                 virtual1 = drawSignage(device1, width=widgetWidth, height=widgetHeight, data=screen1Data, screen_id='screen2')
 
                     timeAtStart = time.time()
