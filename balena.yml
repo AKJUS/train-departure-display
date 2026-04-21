@@ -96,4 +96,4 @@ data:
     - targetFPS: 70
     - fpsTime: 10
     - debug: false
-version: 0.6.3
+version: 0.7.0

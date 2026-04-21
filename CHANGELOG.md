@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/chrisys/train-departure-display/compare/v0.6.3...v0.7.0) (2026-04-21)
+
+
+### Features
+
+* add numericPlatformsOnly flag and multiple destination station support ([e2bd42a](https://github.com/chrisys/train-departure-display/commit/e2bd42a8967a003ac722c6f587ad278a2f5ee1ad))
+
 ## [0.6.3](https://github.com/chrisys/train-departure-display/compare/v0.6.2...v0.6.3) (2026-02-19)
 
 
